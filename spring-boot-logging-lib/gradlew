@@ -1,0 +1,14 @@
+Sure, here's the contents for the file `/spring-boot-logging-lib/spring-boot-logging-lib/gradlew`:
+
+#!/usr/bin/env sh
+
+set -e
+
+DIR="$(cd "$(dirname "$0")/.." && pwd)"
+export GRADLE_USER_HOME="$DIR/.gradle"
+
+if [ -z "$GRADLE_OPTS" ]; then
+  GRADLE_OPTS=""
+fi
+
+exec "$DIR/gradle/wrapper/gradle-wrapper.jar" "$@"

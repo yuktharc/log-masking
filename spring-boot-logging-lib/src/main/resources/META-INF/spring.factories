@@ -1,0 +1,3 @@
+LoggingAutoConfiguration=org.logger.config.LoggingAutoConfiguration
+OpenTelemetryConfig=org.logger.config.OpenTelemetryConfig
+MaskingConfig=org.logger.config.MaskingConfig
