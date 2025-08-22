@@ -11,6 +11,36 @@
 8. PII/secret auto-detection & warnings
 9. Log context snapshotting (dump MDC + request context in one structured log event)
 
+Wrapper approach → Best for fine-grained, per-field control, strongly enforced, but requires devs to adopt new API.
+
+Filter/Encoder config → Best for transparency, no dev training needed, but masking rules limited to regex/centralized functions.
+
+MDC masking → Best for request/response logging, but less helpful for arbitrary log statements.   
+
+AppLogger log = AppLogger.get(UserService.class);
+
+String email = "john.doe@example.com";
+String password = "Secret123";
+
+log.atInfo()
+   .addKeyValue("userId", "12345")
+   .addKeyValue("email", email)        // will be masked → ****
+   .addKeyValue("password", password)  // will be masked → ********
+   .log("User registration completed");
+
+{
+  "@timestamp": "2025-08-22T01:12:00.123Z",
+  "level": "INFO",
+  "logger_name": "UserService",
+  "message": "User registration completed",
+  "userId": "12345",
+  "email": "****",
+  "password": "********",
+  "traceId": "abc123",
+  "spanId": "def456"
+}
+
+
 ## Common Developer Log Statement Formats
 
 Developers typically write logs in three main styles:
